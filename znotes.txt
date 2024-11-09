@@ -1,0 +1,15 @@
+// create the project manually
+mkdir backend2024
+cd backend2024
+npm init -y
+npm install express
+// coding in index.js
+mkdir public
+// put all static html files and their assets in the public folder
+node index.js
+
+// dowload the project from git
+mkdir backend2024
+git clone https://github.com/issac-biz/backend2024.git
+npm install
+node index.js

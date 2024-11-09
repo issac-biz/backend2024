@@ -1,12 +1,16 @@
 const express = require('express')
+const testRouter = require('./routers/test')
+
 const app = express()
 const port = process.env.PORT || 3000
 
+app.use(testRouter)
+
+// static content
 app.use(express.static(__dirname + '/public'))
 app.get('/', function (req, res) {
     res.redirect('/index.htm');
-});
-
+})
 // custom 404 page
 app.use((req, res) => {
     res.type('text/plain')

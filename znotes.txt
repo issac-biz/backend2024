@@ -4,8 +4,12 @@ cd backend2024
 npm init -y
 npm install express
 // coding in index.js
+mkdir routers
+// coding first test api in routers/test.js
 mkdir public
 // put all static html files and their assets in the public folder
+// add public/apitest.htm to test api
+// modify public/index.htm to make [basket icon] jump to apitest.htm
 node index.js
 
 // dowload the project from git

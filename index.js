@@ -1,15 +1,27 @@
 const express = require('express')
-const testRouter = require('./routers/test')
+const mongoose = require('mongoose')
+const dummyRouter = require('./routers/dummy')
+
+mongoose.connect(`mongodb://localhost:27017/fattishop}`)
+    .then(() => {
+        console.log('Database connection successful');
+    })
+    .catch((err) => {
+        console.error('Database connection error: ' + err);
+    })
+    .finally(() => {
+        console.log('mongoose.connection.db: ' + mongoose.connection.db);
+    });
 
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(testRouter)
+app.use(dummyRouter)
 
 // static content
 app.use(express.static(__dirname + '/public'))
 app.get('/', function (req, res) {
-    res.redirect('/index.htm');
+    res.sendFile(__dirname + '/public/index.htm');
 })
 // custom 404 page
 app.use((req, res) => {

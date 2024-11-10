@@ -1,4 +1,4 @@
-// create the project manually
+// create the project manually using command prompt
 mkdir backend2024
 cd backend2024
 npm init -y
@@ -12,8 +12,18 @@ mkdir public
 // modify public/index.htm to make [basket icon] jump to apitest.htm
 node index.js
 
-// dowload the project from git
+// clone the project from git using command prompt
 mkdir backend2024
 git clone https://github.com/issac-biz/backend2024.git
+npm install
+node index.js
+
+// download from git
+// browse to https://github.com/issac-biz/backend2024.git
+// click the [Code] button (green in color)
+// select "Download zip"
+// move the backend2024-main.zip to a folder you like
+// right click the zip file and select extract all
+// in the backend2024-main folder, open a command prompt
 npm install
 node index.js

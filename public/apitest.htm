@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .clickable {
+        cursor: pointer;
+      }
+    </style>
     <script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-      async function test(id) {
-        const url = '/api/tests/' + id;
+      async function dummy(id) {
+        const url = '/api/dummies/' + id;
         try {
           const response = await axios.get(url);
           document.getElementById("result").textContent = JSON.stringify(response.data);
@@ -16,8 +21,8 @@
   </head>
   <body>
     <h2>API Test</h2>
-    <p onclick="test('01')">Test 01</p>
-    <p onclick="test('err')">Test error</p>
+    <p class="clickable" onclick="dummy('01')">dummy 01</p>
+    <p class="clickable" onclick="dummy('err')">dummy error</p>
     <h2>API result</h2>
     <div id="result"></div>
   </body>

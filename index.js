@@ -1,9 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const dummyRouter = require('./routers/dummy')
 const userRouter = require('./routers/user')
 
-mongoose.connect(`mongodb://localhost:27017/fattishop`)
+const app = express()
+const port = process.env.PORT || 3000
+app.use(express.json())
+
+// db connection
+mongoose.connect('mongodb://localhost:27017/fattishop')
     .then(() => {
         console.log('Database connection successful');
     })
@@ -14,11 +21,25 @@ mongoose.connect(`mongodb://localhost:27017/fattishop`)
         console.log('mongoose.connection.db: ' + mongoose.connection.db.databaseName);
     });
 
-const app = express()
-const port = process.env.PORT || 3000
+// session configuration
+const store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/fattishop',
+    collection: 'sessions'
+});
 
-app.use(express.json())
+store.on('error', function(error) {
+    console.log('session store error: ' + error);
+});
 
+app.use(session({
+    secret: 'should be saved somewhere',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: { maxAge: 60000 } // session timeout of 60 seconds
+}));
+
+// api routes
 app.use('/api/dummies', dummyRouter)
 app.use('/api/users', userRouter)
 
@@ -41,6 +62,7 @@ app.use((err, req, res, next) => {
     res.send('500 - Server Error')
 })
 
+// start http server
 app.listen(port, () => console.log(
     `Express started on http://localhost:${port}; ` +
     `press Ctrl-C to terminate.`)

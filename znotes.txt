@@ -13,7 +13,6 @@ mkdir public
 node index.js
 
 // clone the project from git using command prompt
-mkdir backend2024
 git clone https://github.com/issac-biz/backend2024.git
 npm install
 node index.js

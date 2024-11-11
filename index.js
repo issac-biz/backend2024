@@ -1,8 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dummyRouter = require('./routers/dummy')
+const userRouter = require('./routers/user')
 
-mongoose.connect(`mongodb://localhost:27017/fattishop}`)
+mongoose.connect(`mongodb://localhost:27017/fattishop`)
     .then(() => {
         console.log('Database connection successful');
     })
@@ -10,13 +11,16 @@ mongoose.connect(`mongodb://localhost:27017/fattishop}`)
         console.error('Database connection error: ' + err);
     })
     .finally(() => {
-        console.log('mongoose.connection.db: ' + mongoose.connection.db);
+        console.log('mongoose.connection.db: ' + mongoose.connection.db.databaseName);
     });
 
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(dummyRouter)
+app.use(express.json())
+
+app.use('/api/dummies', dummyRouter)
+app.use('/api/users', userRouter)
 
 // static content
 app.use(express.static(__dirname + '/public'))

@@ -14,7 +14,46 @@
           const response = await axios.get(url);
           document.getElementById("result").textContent = JSON.stringify(response.data);
         } catch (error) {
-          document.getElementById("result").textContent = 'catched error - ' + error;
+          document.getElementById("result").textContent = JSON.stringify(error.response.data);
+        }
+      }
+      async function signup() {
+        try {
+          const url = '/api/users';
+          const name = 'test'
+          const password = '1234567'
+          const response = await axios.post(url, {name, password});
+          document.getElementById("result").textContent = JSON.stringify(response.data);
+        } catch (error) {
+          document.getElementById("result").textContent = JSON.stringify(error.response.data);
+        }
+      }
+      async function dropout() {
+        try {
+          const url = '/api/users';
+          const response = await axios.delete(url);
+          document.getElementById("result").textContent = JSON.stringify(response.data);
+        } catch (error) {
+          document.getElementById("result").textContent = JSON.stringify(error.response.data);
+        }
+      }
+      async function login(name) {
+        try {
+          const url = '/api/users/login';
+          const password = '1234567'
+          const response = await axios.post(url, {name, password});
+          document.getElementById("result").textContent = JSON.stringify(response.data);
+        } catch (error) {
+          document.getElementById("result").textContent = JSON.stringify(error.response.data);
+        }
+      }
+      async function logout() {
+        try {
+          const url = '/api/users/logout';
+          const response = await axios.get(url);
+          document.getElementById("result").textContent = JSON.stringify(response.data);
+        } catch (error) {
+          document.getElementById("result").textContent = JSON.stringify(error.response.data);
         }
       }
     </script>
@@ -23,7 +62,12 @@
     <h2>API Test</h2>
     <p class="clickable" onclick="dummy('01')">dummy 01</p>
     <p class="clickable" onclick="dummy('err')">dummy error</p>
-    <h2>API result</h2>
+    <p class="clickable" onclick="signup()">sign up</p>
+    <p class="clickable" onclick="dropout()">drop out</p>
+    <p class="clickable" onclick="login('test')">login ok</p>
+    <p class="clickable" onclick="login('testx')">login fail</p>
+    <p class="clickable" onclick="logout()">logout</p>
+    <h2>API Result</h2>
     <div id="result"></div>
   </body>
 </html>

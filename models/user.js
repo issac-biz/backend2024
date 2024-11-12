@@ -25,15 +25,14 @@ const userSchema = new mongoose.Schema({
 })
 
 //login in users
-userSchema.statics.findByCredential = async (email, password) => {
-    const user = await User.findOne({ email })
+userSchema.statics.findByCredential = async (name, password) => {
+    const user = await User.findOne({ name })
     if (!user) {
         throw new Error('Unable to log in')
     }
     const isMatch = await bcrypt.compare(password, user.password)
-    console.log(isMatch)
     if(!isMatch) {
-        throw new Error('Unable to login')
+        throw new Error('Unable to log in')
     }
 
     return user

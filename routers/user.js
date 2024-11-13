@@ -13,7 +13,12 @@ router.post('/', async (req, res) => {
         if (error.code == 11000) {
             res.status(400).json({message: `${req.body.name} is already registered`})
         } else {
-            res.status(400).json({message: error.message})
+            if (/password.*length/.test(error.message)) {
+                res.status(400).json({message: "password length must be longer than 6"})
+            } else {
+                res.status(400).json({message: error.message})
+            }
+            
         }
     }
 })

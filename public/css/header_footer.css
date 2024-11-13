@@ -105,7 +105,7 @@ header{
 }
 
 .logo{
-	max-height:60px;
+	max-height:46px;
 }
 
 header ul{
@@ -116,7 +116,7 @@ header ul{
 }
 header li{
 	color: #80866d;
-	font-size: 25px;
+	font-size: 20px;
 	justify-content: space-between;
 	padding: 16px;
 }
@@ -131,20 +131,39 @@ header img.setting{
 	width: auto;
 }
 
+header .login{
+	text-align: center;
+}
+
+.login a, .login span{
+	font-size:16px;
+	padding:2px;
+	text-decoration: none;
+	color: #4b0b07;
+}
+
+.login a:hover{
+	text-decoration: underline;
+	font-size: 18px;
+	font-weight:800;
+}
+
 .icon{
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 }
 
 .mobile{
 	display:none;
 }
 
+
 /*footer*/
 
 footer{
 	background-color: #fdfae0;
 	height:100px;
+	width:100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -156,6 +175,7 @@ footer nav{
 	max-width: 1000px;
 	margin: 0 auto;
 	padding:0px 100px;
+	
 	
 }
 

@@ -82,8 +82,8 @@ main.container{
 	width:100%;
 	height:74px;
 	border: 2px solid #4b0b07;
-	background-color: #fff;
-	color:#4b0b07;
+	background-color: #4b0b07;
+	color:#fff;
 	font-size:30px;
 	font-weight:600;
 	border-radius:12px;
@@ -91,8 +91,8 @@ main.container{
 }
 
 .sizes .confirm:hover{
-	background-color:#4b0b07;
-	color:#fff;
+	background-color:#fff;
+	color:#4b0b07;
 }
 
 .sizes .options{

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Fatti | Sign Up</title>
+		<link href="css/reset.css" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+		<link href="css/header_footer.css" rel="stylesheet">
+		<link href="css/signup.css" rel="stylesheet">
+		<script src="js/jquery-3.6.0.min.js"></script>
+	</head>
+
+
+	<body>
+		<script>
+			function test() {
+				if (confirm('Successful?')) {
+					document.getElementById("data").textContent = "You have successfully signed up. Thank you."
+					document.getElementById("data").style.height = "300px"
+					document.getElementById("error").textContent = ""
+				} else {
+					document.getElementById("error").textContent = "Please check data"
+				}
+			}
+		</script>
+		<div id="include-header"></div>
+		<main class="container">
+		<form onsubmit="test(); return false">
+			<h1>Sign Up</h1>
+			<div id="data">
+			<fieldset>
+				<label><i>*</i>User Name</label>
+				<input type="text" name="name" autocomplete="username" required>
+			</fieldset>
+			<fieldset>
+				<label><i>*</i>Password</label>
+				<input type="password" name="password" autocomplete="password" required>
+			</fieldset>
+			<fieldset>
+				<label><i>*</i>Confirm Password</label>
+				<input type="password" name="password" autocomplete="password" required>
+			</fieldset>
+			<fieldset>
+				<label><i>*</i>Email</label>
+				<input type="email" name="email" autocomplete="email" required>
+			</fieldset>
+			<button>Sign Up</button>
+			</div>
+			<div id="error" style="margin-top:20px; color:red; font-size:20px;"></div>
+		</form>
+		
+		</main>
+		<div id="include-footer"></div>
+	</body>
+	<script>
+		$(document).ready(function() {
+			  $("#include-header").load("inc_header.html"); 
+			  $("#include-footer").load("inc_footer.html"); 
+		});
+	</script>
+</html>

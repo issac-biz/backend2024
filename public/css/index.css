@@ -28,7 +28,7 @@
 	display:none; 
 }
 
-.arrowr .active{
+.arrowr .inactive{
 	display:none;
 }
 
@@ -107,6 +107,11 @@ h4.org{
 	padding:82px 0 12px 0;
 	text-align: center;
 }
+
+#tips .title h1{
+	padding-bottom:14px;
+}
+
 
 #content{
 	background-color: #ccd5ae;

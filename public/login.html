@@ -12,22 +12,42 @@
 		<link href="css/header_footer.css" rel="stylesheet">
 		<link href="css/login.css" rel="stylesheet">
 		<script src="js/jquery-3.6.0.min.js"></script>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
+		<script>
+			async function login() {
+				const loginForm = new FormData(document.getElementById("loginForm"))
+				const loginData = Object.fromEntries(loginForm.entries())
+				try {
+					const response = await axios.post('/api/users/login', loginData)
+					const name = response.data.name;
+					document.getElementById("data").innerHTML = `<h2>You (${name}) have successfully logged in<h2>`
+					document.getElementById("data").style.height = "300px"
+					document.getElementById("error").textContent = ""
+				} catch(error) {
+					document.getElementById("error").textContent = error.response.data.message
+				}
+			}
+		</script>
+		
 		<div id="include-header"></div>
 		<main class="container">
-		<form>
+		<form id="loginForm" onsubmit="login(); return false">
 			<h1>Login</h1>
+			<div id="data">
 			<fieldset action="user.js" method="post">
 				<label><i>*</i>User Name</label>
 				<input type="text" name="name" autocomplete="username" required>
 			</fieldset>
 			<fieldset action="user.js" method="post">
 				<label><i>*</i>Password</label>
-				<input type="text" name="password" autocomplete="password" required>
+				<input type="password" name="password" autocomplete="password" required>
 			</fieldset>
-			<p>Did not have an account? <a href="signup.html">Sign up</a> Now.</p>
+			<p>Do not have an account? <a href="signup.html">Sign up</a> Now.</p>
 			<button>Login</button>
+			</div>
+			<div id="error" style="margin-top:20px; color:red; font-size:20px;"></div>
 		</form>
 		
 		</main>

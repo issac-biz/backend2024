@@ -11,10 +11,12 @@ router.post('/', async (req, res) => {
         res.status(201).json({name: user.name})
     } catch (error) {
         if (error.code == 11000) {
-            res.status(400).json({message: `${req.body.name} is already registered`})
+            res.status(400).json({message: `${req.body.name} and/or ${req.body.email} is already registered`})
         } else {
             if (/password.*length/.test(error.message)) {
                 res.status(400).json({message: "password length must be longer than 6"})
+            } else if (/name.*length/.test(error.message)) {
+                res.status(400).json({message: "name length must be longer than 2"})
             } else {
                 res.status(400).json({message: error.message})
             }

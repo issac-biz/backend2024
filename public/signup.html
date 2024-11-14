@@ -12,24 +12,35 @@
 		<link href="css/header_footer.css" rel="stylesheet">
 		<link href="css/signup.css" rel="stylesheet">
 		<script src="js/jquery-3.6.0.min.js"></script>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 
 
 	<body>
 		<script>
-			function test() {
-				if (confirm('Successful?')) {
-					document.getElementById("data").textContent = "You have successfully signed up. Thank you."
-					document.getElementById("data").style.height = "300px"
-					document.getElementById("error").textContent = ""
+			async function signup() {
+				const signupForm = new FormData(document.getElementById("signupForm"))
+				const signupData = Object.fromEntries(signupForm.entries())
+				if (signupData.password !== signupData.confirmpassword) {
+					document.getElementById("error").textContent = "confirm password is different from password, input again"
 				} else {
-					document.getElementById("error").textContent = "Please check data"
+					delete signupData.confirmpassword
+					try {
+						const response = await axios.post('/api/users', signupData)
+						const name = response.data.name;
+						document.getElementById("data").innerHTML = `<h2>You (${name}) have successfully signed up. Thank you.<h2>`
+						document.getElementById("data").style.height = "300px"
+						document.getElementById("error").textContent = ""
+					} catch(error) {
+						document.getElementById("error").textContent = error.response.data.message
+					}
 				}
 			}
 		</script>
+		
 		<div id="include-header"></div>
 		<main class="container">
-		<form onsubmit="test(); return false">
+		<form id="signupForm" onsubmit="signup(); return false">
 			<h1>Sign Up</h1>
 			<div id="data">
 			<fieldset>
@@ -42,7 +53,7 @@
 			</fieldset>
 			<fieldset>
 				<label><i>*</i>Confirm Password</label>
-				<input type="password" name="password" autocomplete="password" required>
+				<input type="password" name="confirmpassword" autocomplete="password" required>
 			</fieldset>
 			<fieldset>
 				<label><i>*</i>Email</label>

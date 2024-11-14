@@ -5,9 +5,15 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        minLength: 3,
         unique: true,
         trim: true,
-        lowercase: false
+        lowercase: false,
+        validate(value) {
+            if(/[^a-zA-Z0-9]+/.test(value)) {
+                throw new Error('name must only contain letters and digits')
+            }
+        }
     },
     password: {
         type: String,

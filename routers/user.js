@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-//drop out
+//inactivate
 router.delete('/', async(req, res) => {
     if (req.session.name === undefined) {
         res.status(400).json({message: 'not logged in'})

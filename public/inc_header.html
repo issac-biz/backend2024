@@ -18,8 +18,8 @@
 				<a href="apitest.htm"><img src="img/bag.png" class="bag"></a>
 				<img src="img/setting.png" class="setting">
 				<nav class="login">
-					<div><a href="login.html">Login</a><span>/</span><a href="signup.html">Sign Up</a></div>
-					<div class="logout"><a>Log Out</a></div>
+					<div id="beforelogin"><a href="login.html">Login</a><span>/</span><a href="signup.html">Sign Up</a></div>
+					<div id="afterlogin"><a onclick="logout(); return false" href="#">Logout</a><span>/</span><a onclick="inactivate(); return false" href="#">Inactivate</a></div>
 				</nav>
 			</div>
 		</div>
@@ -57,11 +57,53 @@
 				$(".burger img").toggle();
 				$(".mobile ul").slideToggle();
 			})
-			$(".logout").hide();
-			$(".login").on("click",function(){
-				$(".login").toggleClass();
-			})
-			
+			$("#afterlogin").hide();
+			checksession();
 		 });
+	</script>
+	<script>
+		async function logout() {
+			try {
+				const response = await axios.get('/api/users/logout')
+				const name = response.data.name;
+				document.getElementById("data").innerHTML = `<h1 style="margin: 45px 10px;">Logout<h1><h2>You (${name}) have successfully logged out<h2>`
+				document.getElementById("data").style.height = "300px"
+				document.getElementById("data").style.textAlign = "center"
+				$("#beforelogin").show()
+				$("#afterlogin").hide()
+			} catch(error) {
+				alert('logout: ' + error.response.data.message)
+			}
+		}
+		async function inactivate() {
+			try {
+				const response = await axios.delete('/api/users')
+				const name = response.data.name;
+				document.getElementById("data").innerHTML = `<h1 style="margin: 45px 10px;">Inactivate<h1><h2>You (${name}) have successfully inactivated your login<h2>`
+				document.getElementById("data").style.height = "300px"
+				document.getElementById("data").style.textAlign = "center"
+				$("#beforelogin").show()
+				$("#afterlogin").hide()
+			} catch(error) {
+				alert('inactivate: ' + error.response.data.message)
+			}
+		}
+		async function checksession() {
+			try {
+				const response = await axios.get('/api/sessions')
+				const loggedin = response.data.loggedin;
+				if (loggedin) {
+					$("#beforelogin").hide()
+					$("#afterlogin").show()
+				} else {
+					$("#beforelogin").show()
+					$("#afterlogin").hide()
+				}
+			} catch(error) {
+				alert('checksession: ' + error.response.data.message)
+				$("#beforelogin").hide()
+				$("#afterlogin").show()
+			}
+		}
 	</script>
 </html>

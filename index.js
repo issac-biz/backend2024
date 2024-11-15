@@ -4,8 +4,9 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const dummyRouter = require('./routers/dummy')
 const userRouter = require('./routers/user')
-
+const sessionRouter = require('./routers/session')
 const app = express()
+
 const port = process.env.PORT || 3000
 app.use(express.json())
 
@@ -42,6 +43,7 @@ app.use(session({
 // api routes
 app.use('/api/dummies', dummyRouter)
 app.use('/api/users', userRouter)
+app.use('/api/sessions', sessionRouter)
 
 // static content
 app.use(express.static(__dirname + '/public'))

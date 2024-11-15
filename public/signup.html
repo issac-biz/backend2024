@@ -28,9 +28,8 @@
 					try {
 						const response = await axios.post('/api/users', signupData)
 						const name = response.data.name;
-						document.getElementById("data").innerHTML = `<h2>You (${name}) have successfully signed up. Thank you.<h2>`
+						document.getElementById("data").innerHTML = `<h1>Sign Up</h1><h2>You (${name}) have successfully signed up. Thank you.<h2>`
 						document.getElementById("data").style.height = "300px"
-						document.getElementById("error").textContent = ""
 					} catch(error) {
 						document.getElementById("error").textContent = error.response.data.message
 					}
@@ -41,8 +40,8 @@
 		<div id="include-header"></div>
 		<main class="container">
 		<form id="signupForm" onsubmit="signup(); return false">
-			<h1>Sign Up</h1>
 			<div id="data">
+			<h1>Sign Up</h1>
 			<fieldset>
 				<label><i>*</i>User Name</label>
 				<input type="text" name="name" autocomplete="username" required>
@@ -60,8 +59,8 @@
 				<input type="email" name="email" autocomplete="email" required>
 			</fieldset>
 			<button>Sign Up</button>
-			</div>
 			<div id="error" style="margin-top:20px; color:red; font-size:20px;"></div>
+			</div>
 		</form>
 		
 		</main>
